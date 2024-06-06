@@ -1,4 +1,4 @@
-# camundaTraining
+# Description of all Projects in the Repository
 
 ## I. StandAlone-Process/  
     1. exclusive_gw.bpmn: starting with exclusive gateway and joining to an exclusive gateway.  
