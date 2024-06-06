@@ -5,4 +5,7 @@ standAlone-Process/
   2. parallel_gw_ex.bpmn: starting with parallel gateway and joining to an parellel gateway.
   3. rest-api-connector.bpmn: rest-api call to get response and parse in javascript to get a specific value then set it into execution scope.
 
-JavaApp-UserTask_ServiceTask
+JavaApp-UserTask_ServiceTask:
+  This is a SpringBoot Application, which is having example of 
+    1. User Task - implemented TaskListener and ExecutionListener.
+    2. Service Task - implemented Service implementation and ExecutionListener
