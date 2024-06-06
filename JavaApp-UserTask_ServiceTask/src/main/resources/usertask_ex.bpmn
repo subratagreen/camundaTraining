@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1">
+  <bpmn:process id="usertask_ex" name="User Task Example" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0cia3qq</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0cia3qq" sourceRef="StartEvent_1" targetRef="Activity_12gf6u7" />
+    <bpmn:sequenceFlow id="Flow_1vb1b94" sourceRef="Activity_12gf6u7" targetRef="Activity_1eye35f" />
+    <bpmn:endEvent id="Event_0dgobe9">
+      <bpmn:incoming>Flow_0ko2ygg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ko2ygg" sourceRef="Activity_1eye35f" targetRef="Event_0dgobe9" />
+    <bpmn:userTask id="Activity_12gf6u7" name="Get the Approver" camunda:assignee="${approver}">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.example.workflow.usertask.MyExecutionListener" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0cia3qq</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vb1b94</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1eye35f" name="Approval" camunda:assignee="${approver}">
+      <bpmn:extensionElements>
+        <camunda:taskListener delegateExpression="${createListener}" event="create" id="" />
+        <camunda:taskListener delegateExpression="${assignedListener}" event="update" id="" />
+        <camunda:taskListener class="" event="delete" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1vb1b94</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ko2ygg</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:textAnnotation id="TextAnnotation_078maj2">
+      <bpmn:text>updated</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0vx5sab" sourceRef="Activity_1eye35f" targetRef="TextAnnotation_078maj2" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="usertask_ex">
+      <bpmndi:BPMNEdge id="Flow_0ko2ygg_di" bpmnElement="Flow_0ko2ygg">
+        <di:waypoint x="580" y="207" />
+        <di:waypoint x="652" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vb1b94_di" bpmnElement="Flow_1vb1b94">
+        <di:waypoint x="370" y="207" />
+        <di:waypoint x="480" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cia3qq_di" bpmnElement="Flow_0cia3qq">
+        <di:waypoint x="215" y="207" />
+        <di:waypoint x="270" y="207" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="189" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_110dqtd_di" bpmnElement="Activity_12gf6u7">
+        <dc:Bounds x="270" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_078maj2_di" bpmnElement="TextAnnotation_078maj2">
+        <dc:Bounds x="530" y="80" width="100" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dgobe9_di" bpmnElement="Event_0dgobe9">
+        <dc:Bounds x="652" y="189" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14ght1y_di" bpmnElement="Activity_1eye35f">
+        <dc:Bounds x="480" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0vx5sab_di" bpmnElement="Association_0vx5sab">
+        <di:waypoint x="548" y="167" />
+        <di:waypoint x="573" y="110" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
