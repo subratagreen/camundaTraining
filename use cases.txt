@@ -1,0 +1,118 @@
+
+
+
+project execution timeline till production - use gateway, Pool/Lane, Link Event, Message, etc.. 
+
+Agile:
+	1. Story Grooming - 2
+	2. Estimation - 1
+	3. Sprint Planning - 1
+	
+	4.1 Development and Unit Test - 10		4.2 Test Case Writing - 3
+	
+	6. Test Case Execution - 3
+	
+	7. UAT Deployment - 1
+	
+	8.1 UAT Testing - 1 			8.2 Regression - 1
+	
+	10. Production Deployment - 1
+	11. Sanity in Production - 1
+	
+	
+	22 USP
+	
+=============================================================
+
+define 3 modules - order, payment and delivery
+
+payment module:
+were user able to do payment in 30 sec
+	if yes - proceed for delivery
+	if no - throw an error - payment_timed_out
+
+error in delivery module:
+is this model available in warehouse,
+	if yes then deliver the phone 
+	if no then throw an error - out_of_stock
+	
+	
+
+
+------------------------------------
+
+
+
+Exclusive ----> Exclusive : works  as diagram
+
+Parallel -----> Parallel :  works as diagram
+
+Exclusive -----> Parallel : Not work
+
+Parallel ----> Exclusive : each outgoing branch from parallel will execute separately for each connected exclusive gw
+
+Inclusive -----> Inclusive :  work as diagram
+
+Inclusive --> Parallel : Not work (parallel will for all the flows to complete)
+
+Parallel ---> Inclusive : works as diagram
+
+Inclusive ---> Exclusive : each matched outgoing branch from inclusive will execute separately for each connected exclusive gw
+
+Exclusive --> Inclusive : works as diagram
+
+
+
+
+=================== Rest API ==============
+
+http://localhost:8080/engine-rest/signal
+{
+    "name": "Signal-q123",
+    "variable": {
+        "alertType": {
+            "name": "Subrat"
+        }
+    }
+}
+
+
+
+http://localhost:8080/engine-rest/message
+{
+    "messageName": "Message_one",
+    "businessKey": "jjj111",
+    "processVariables": {
+        "food": {
+            "value": "pizza",
+            "type": "String"
+        }
+    }
+}
+
+
+http://localhost:8080/engine-rest/condition
+{
+    "variables": {
+        "varr1": {
+            "value": "100",
+            "type": "Integer"
+        }
+    },
+    "businessKey":"wewe"
+}
+
+
+
+http://localhost:8080/engine-rest/condition
+
+
+{
+    "variables": {
+        "var1": {
+            "value": 100,
+            "type": "integer"
+        }
+    },
+    "businessKey":"ASD123"
+}
