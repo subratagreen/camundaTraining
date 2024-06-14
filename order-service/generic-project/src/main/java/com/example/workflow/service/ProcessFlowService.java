@@ -14,8 +14,10 @@ public class ProcessFlowService {
 	public String startOrderProcessFlow() {
 		String businessKey = "Order-"+UUID.randomUUID();
 		
-		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-		processEngine.getRuntimeService().startProcessInstanceById(ORDER_PROCESS_WF,businessKey);
+		//ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+		
+		ProcessEngine processEngine = ProcessEngines.getProcessEngine("Test1");
+		processEngine.getRuntimeService().startProcessInstanceByKey(ORDER_PROCESS_WF,businessKey);
 		
 		return businessKey;
 	}
