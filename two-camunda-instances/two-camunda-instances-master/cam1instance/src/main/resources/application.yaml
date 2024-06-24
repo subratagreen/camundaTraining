@@ -1,0 +1,23 @@
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/postgres?autoReconnect=true
+  username: cam1
+  password: cam1
+  driver-class-name: org.postgresql.Driver
+camunda.bpm:
+  admin-user:
+    id: cam1
+    password: cam1
+    firstName: Tic
+  filter:
+    create: All tasks
+server.port: 8081
+server:
+  servlet:
+    context-path: /cam1
+#camunda:
+
+#  bpm:
+#    database:
+#      schema-update: create
+#      schema-name: cam1
+#      table-prefix: cam1.
