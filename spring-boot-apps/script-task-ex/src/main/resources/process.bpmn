@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <bpmn:process id="script-task-demo" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:endEvent id="EndEvent_0x6ir2l">
+      <bpmn:incoming>SequenceFlow_16gzt2m</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_16gzt2m" sourceRef="say-hello" targetRef="EndEvent_0x6ir2l" />
+    <bpmn:userTask id="say-hello" name="Say hello to&#10;demo" camunda:candidateUsers="demo">
+      <bpmn:incoming>Flow_0njng0g</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_16gzt2m</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0ptewje" sourceRef="Activity_0usjksi" targetRef="Activity_0n4ls26" />
+    <bpmn:sequenceFlow id="Flow_0njng0g" sourceRef="Activity_0n4ls26" targetRef="say-hello" />
+    <bpmn:startEvent id="Event_0i3wpa3">
+      <bpmn:outgoing>Flow_0yx0439</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0yx0439" sourceRef="Event_0i3wpa3" targetRef="Activity_0usjksi" />
+    <bpmn:scriptTask id="Activity_0usjksi" name="javascript ex" scriptFormat="js">
+      <bpmn:incoming>Flow_0yx0439</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ptewje</bpmn:outgoing>
+      <bpmn:script>console.log("welcome to javascript");
+execution.setVariable("name","subrat");</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_0n4ls26" name="groovy ex" scriptFormat="groovy">
+      <bpmn:incoming>Flow_0ptewje</bpmn:incoming>
+      <bpmn:outgoing>Flow_0njng0g</bpmn:outgoing>
+      <bpmn:script>println "welcome to groovy";
+execution.setVariable("training","camunda");</bpmn:script>
+    </bpmn:scriptTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="script-task-demo">
+      <bpmndi:BPMNEdge id="SequenceFlow_16gzt2m_di" bpmnElement="SequenceFlow_16gzt2m">
+        <di:waypoint x="700" y="117" />
+        <di:waypoint x="772" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ptewje_di" bpmnElement="Flow_0ptewje">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="420" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0njng0g_di" bpmnElement="Flow_0njng0g">
+        <di:waypoint x="520" y="117" />
+        <di:waypoint x="600" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yx0439_di" bpmnElement="Flow_0yx0439">
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0x6ir2l_di" bpmnElement="EndEvent_0x6ir2l">
+        <dc:Bounds x="772" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="say-hello">
+        <dc:Bounds x="600" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0i3wpa3_di" bpmnElement="Event_0i3wpa3">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1p3on6e_di" bpmnElement="Activity_0usjksi">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03x1owv_di" bpmnElement="Activity_0n4ls26">
+        <dc:Bounds x="420" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <bpmn:process id="comcast-demo-caller" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:serviceTask id="say-hello" name="call the process" camunda:delegateExpression="${callerService}">
+      <bpmn:incoming>Flow_00sswk5</bpmn:incoming>
+      <bpmn:outgoing>Flow_1slip2d</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_068audw">
+      <bpmn:incoming>Flow_04qap70</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_04qap70" sourceRef="Activity_0mqgkpw" targetRef="Event_068audw" />
+    <bpmn:userTask id="Activity_0mqgkpw" name="complete" camunda:assignee="demo">
+      <bpmn:incoming>Flow_1slip2d</bpmn:incoming>
+      <bpmn:outgoing>Flow_04qap70</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1slip2d" sourceRef="say-hello" targetRef="Activity_0mqgkpw" />
+    <bpmn:sequenceFlow id="Flow_00sswk5" sourceRef="Activity_1dtosy6" targetRef="say-hello" />
+    <bpmn:userTask id="Activity_1dtosy6" name="call the other service" camunda:assignee="demo">
+      <bpmn:incoming>Flow_0ax38iq</bpmn:incoming>
+      <bpmn:outgoing>Flow_00sswk5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:startEvent id="Event_0mogbve">
+      <bpmn:outgoing>Flow_0ax38iq</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0ax38iq" sourceRef="Event_0mogbve" targetRef="Activity_1dtosy6" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="comcast-demo-caller">
+      <bpmndi:BPMNEdge id="Flow_1slip2d_di" bpmnElement="Flow_1slip2d">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="600" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04qap70_di" bpmnElement="Flow_04qap70">
+        <di:waypoint x="700" y="117" />
+        <di:waypoint x="742" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00sswk5_di" bpmnElement="Flow_00sswk5">
+        <di:waypoint x="390" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ax38iq_di" bpmnElement="Flow_0ax38iq">
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="290" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1g270qj_di" bpmnElement="say-hello">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0exzvo4_di" bpmnElement="Activity_0mqgkpw">
+        <dc:Bounds x="600" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_068audw_di" bpmnElement="Event_068audw">
+        <dc:Bounds x="742" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ytr733_di" bpmnElement="Activity_1dtosy6">
+        <dc:Bounds x="290" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0mogbve_di" bpmnElement="Event_0mogbve">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

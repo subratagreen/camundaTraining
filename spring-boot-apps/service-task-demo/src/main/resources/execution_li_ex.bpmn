@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <bpmn:process id="execution_li_ex" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${flowStartInfo}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="say-hello" />
+    <bpmn:serviceTask id="say-hello" name="do loan calculation" camunda:class="com.cast.workflow.jc.JavaClassAsServiceTask">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${assignInterestRate}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
+      <bpmn:outgoing>Flow_1slip2d</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_068audw">
+      <bpmn:incoming>Flow_04qap70</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_04qap70" sourceRef="Activity_0mqgkpw" targetRef="Event_068audw" />
+    <bpmn:userTask id="Activity_0mqgkpw" name="complete" camunda:assignee="demo">
+      <bpmn:incoming>Flow_1jdu8al</bpmn:incoming>
+      <bpmn:outgoing>Flow_04qap70</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1slip2d" sourceRef="say-hello" targetRef="Activity_1nmyl9s" />
+    <bpmn:sequenceFlow id="Flow_1jdu8al" sourceRef="Activity_1nmyl9s" targetRef="Activity_0mqgkpw" />
+    <bpmn:serviceTask id="Activity_1nmyl9s" name="rest api call">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="header">
+              <camunda:map>
+                <camunda:entry key="accept">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="url">${url}</camunda:inputParameter>
+            <camunda:outputParameter name="responseCode">${statusCode}</camunda:outputParameter>
+            <camunda:outputParameter name="response">${response}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+        <camunda:executionListener delegateExpression="${variableAssignment}" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1slip2d</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jdu8al</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="execution_li_ex">
+      <bpmndi:BPMNEdge id="Flow_1jdu8al_di" bpmnElement="Flow_1jdu8al">
+        <di:waypoint x="480" y="117" />
+        <di:waypoint x="540" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1slip2d_di" bpmnElement="Flow_1slip2d">
+        <di:waypoint x="310" y="117" />
+        <di:waypoint x="380" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04qap70_di" bpmnElement="Flow_04qap70">
+        <di:waypoint x="640" y="117" />
+        <di:waypoint x="732" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="158" y="117" />
+        <di:waypoint x="210" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="122" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1g270qj_di" bpmnElement="say-hello">
+        <dc:Bounds x="210" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_068audw_di" bpmnElement="Event_068audw">
+        <dc:Bounds x="732" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03t6qnq_di" bpmnElement="Activity_1nmyl9s">
+        <dc:Bounds x="380" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0exzvo4_di" bpmnElement="Activity_0mqgkpw">
+        <dc:Bounds x="540" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

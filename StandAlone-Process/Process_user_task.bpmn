@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0zsv85b" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="Process_user_task" isExecutable="true" camunda:historyTimeToLive="90">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1sr2ora</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1sr2ora" sourceRef="StartEvent_1" targetRef="Activity_1at5x4u" />
+    <bpmn:sequenceFlow id="Flow_0tg9pkz" sourceRef="Activity_1at5x4u" targetRef="Activity_1dop2o6" />
+    <bpmn:endEvent id="Event_10po71r">
+      <bpmn:incoming>Flow_1hpevl8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1hpevl8" sourceRef="Activity_1dop2o6" targetRef="Event_10po71r" />
+    <bpmn:userTask id="Activity_1at5x4u" name="provide approver" camunda:assignee="demo" camunda:dueDate="${due_date}">
+      <bpmn:extensionElements>
+        <camunda:taskListener expression="${notifyDepartment}" event="create" />
+        <camunda:taskListener class="${sendNotification}" event="assignment" />
+        <camunda:taskListener delegateExpression="${notifyAccountOwner}" event="complete" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1sr2ora</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tg9pkz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1dop2o6" name="please approve" camunda:assignee="${approver}">
+      <bpmn:incoming>Flow_0tg9pkz</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hpevl8</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_user_task">
+      <bpmndi:BPMNEdge id="Flow_1sr2ora_di" bpmnElement="Flow_1sr2ora">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tg9pkz_di" bpmnElement="Flow_0tg9pkz">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hpevl8_di" bpmnElement="Flow_1hpevl8">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10po71r_di" bpmnElement="Event_10po71r">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_120j7nx_di" bpmnElement="Activity_1at5x4u">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1dwarwg_di" bpmnElement="Activity_1dop2o6">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
