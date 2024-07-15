@@ -1,4 +1,35 @@
 
+assignment:
+----------
+create a workflow, use 2 usertask -
+		first user task -(should not have assignee) , assignee should be assigned from the execution / task listener
+		
+		second user task will have a variable as assignee and that variable should be initialized from first usertask via execution / task listener
+		
+		
+design a workflow which will process the reponse from this url (https://api.restful-api.dev/objects) and create a list of device names and assign those into execution variable.
+
+
+create a main process (main-process)
+	start 2 different process(process-1 and process-2) from main with dynamic business keys 
+	
+
+call a java class without implementing camunda apis (TaskListener/ExecutionListener/JavaDevegate) ->
+	${myBean.myMethod()} - challenge is:- get the flow / execution scope.
+	
+	
+
+start a process from normal java class without camunda apis
+	(controller -> service -> BPMNUtilityService - startBpmnProcess(String processKey, String businessKey)
+	
+	http://localhost:8080/myApplication/bpmn/start/{processKey}/{businessKey}
+	
+	Advantage: from frontend, we will be able to instantiate a process (similar TaskList)
+	
+	when we are using, camunda apis, then we can write a code as below:
+		RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
+		runtimeService.startProcessInstanceByKey ("process_to_call");
+
 
 
 project execution timeline till production - use gateway, Pool/Lane, Link Event, Message, etc.. 
@@ -43,23 +74,26 @@ is this model available in warehouse,
 
 
 
-Exclusive ----> Exclusive : works  as diagram
 
-Parallel -----> Parallel :  works as diagram
+Gateway
+=======
+Exclusive -> connected -> Exclusive : works as expected
+Exclusive -> connected -> Parallel : does not work because parallel gw will for all braches to complete but 	
+									 exclusive will execute only one bnch at a time depending condition match
+Exclusive -> connected -> Inclusive : works as expected
 
-Exclusive -----> Parallel : Not work
 
-Parallel ----> Exclusive : each outgoing branch from parallel will execute separately for each connected exclusive gw
+Parallel -> connected -> Exclusive : does not work as expected because the flow after exclusive gw will execute
+									 muliple times depending onnumber of braches
+Parallel -> connected -> Parallel : works as expected
+Parallel -> connected -> Inclusive : works as expected
 
-Inclusive -----> Inclusive :  work as diagram
 
-Inclusive --> Parallel : Not work (parallel will for all the flows to complete)
-
-Parallel ---> Inclusive : works as diagram
-
-Inclusive ---> Exclusive : each matched outgoing branch from inclusive will execute separately for each connected exclusive gw
-
-Exclusive --> Inclusive : works as diagram
+Inclusive -> connected -> Exclusive : does not work as expected because the flow after exclusive gw will execute
+									 muliple times depending onnumber of braches
+Inclusive -> connected -> Parallel : does not work because parallel gw will for all braches to complete but 	
+									 exclusive will execute only one bnch at a time depending condition match
+Inclusive -> connected -> Inclusive : works as expected
 
 
 
@@ -116,3 +150,71 @@ http://localhost:8080/engine-rest/condition
     },
     "businessKey":"ASD123"
 }
+
+========
+1. add a text file in variable scope in a service task
+	{"name":"subrat","id":"C001","age":35}
+
+2. read the text file in a service task, convert the json content into customer object and add customer object in variable scope
+
+
+======================
+
+secure camunda rest-api using spring security and allow tasklist/cockpit to use camunda users
+
+=======================
+
+request for new connection (customer)
+	- online form fillup (name, address, mobile, plan)
+	- submitted to BB Provider
+	- timeout - 2 days, after 2 days, it will be escalated to higher mgmt
+	
+registration of customer (account/operation)
+	- create account (name, address, mobile, plan)
+	- select a plan (list of plans)
+	- payment
+		- cash
+		- online
+	- payment recvd
+	- registration completed
+	- timeout - 1 day, after 1 day, it will be escalated to higher mgmt
+	
+installation (implementation/operation)
+	- get notification
+	- get account info
+	- manually install (LAN, BB, FIBER, Wireless Fiber)
+	- setup with laptop/desktop/mobile/tv/
+	- installation done
+	- call us directly (solve immidiately) - 7 days
+	- after 7 days, call customer care and raise a ticket
+	- timeout - 2 day, after 2 day, it will be escalated to higher mgmt
+	
+monthly/periodically payment 
+	- notification is automated via online, email, message, calls 
+	- payment
+		- cash
+		- online 
+		
+plan change
+	- get list of plans 
+	- select a plan
+	- if reqd, do the payment 
+
+raise a ticket
+	- automated device/network testing running in app/online website 
+		- test modem/fiber device/sim
+		- test network in the area 
+		- do speed test 
+		- reboot device
+	- connects to customer care 
+		- listen to the problem
+		- reboot device 
+		- create a ticket 
+		
+solve the ticket (implementation/operation)
+	- get notification
+	- get account info
+	- check the network device 
+	- also check laptop/desktop/mobile/tv/
+	- resolve the problem
+	- timeout - 2 days, after 2 days, it will be escalated to higher mgmt
