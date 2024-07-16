@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_10f6guw" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="Process_start_timer_ex" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:sequenceFlow id="Flow_146sqg7" sourceRef="StartEvent_1" targetRef="Activity_18zq91r" />
+    <bpmn:sequenceFlow id="Flow_0ycr8rr" sourceRef="Activity_18zq91r" targetRef="Activity_19cr9d1" />
+    <bpmn:endEvent id="Event_0idwats">
+      <bpmn:incoming>Flow_1lf540e</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1lf540e" sourceRef="Activity_19cr9d1" targetRef="Event_0idwats" />
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_146sqg7</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0ef538z">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R3/PT10S</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:startEvent>
+    <bpmn:scriptTask id="Activity_18zq91r" name="database cleanup" scriptFormat="js">
+      <bpmn:incoming>Flow_146sqg7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ycr8rr</bpmn:outgoing>
+      <bpmn:script>console.log("database cleanup");</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:userTask id="Activity_19cr9d1" name="database has been cleaned up">
+      <bpmn:incoming>Flow_0ycr8rr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1lf540e</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_start_timer_ex">
+      <bpmndi:BPMNEdge id="Flow_146sqg7_di" bpmnElement="Flow_146sqg7">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ycr8rr_di" bpmnElement="Flow_0ycr8rr">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lf540e_di" bpmnElement="Flow_1lf540e">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0idwats_di" bpmnElement="Event_0idwats">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0le0r61_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ob4iwq_di" bpmnElement="Activity_18zq91r">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_064kphp_di" bpmnElement="Activity_19cr9d1">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
