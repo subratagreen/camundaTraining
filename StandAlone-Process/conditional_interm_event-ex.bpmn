@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1y86ks6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="conditional_interm_event-ex" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_11jw4ts</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_11jw4ts" sourceRef="StartEvent_1" targetRef="Activity_1jzvy40" />
+    <bpmn:sequenceFlow id="Flow_0qpouyo" sourceRef="Activity_1jzvy40" targetRef="Event_10vrafx" />
+    <bpmn:sequenceFlow id="Flow_17ug4ma" sourceRef="Event_10vrafx" targetRef="Activity_1ujviur" />
+    <bpmn:endEvent id="Event_1vxout5">
+      <bpmn:incoming>Flow_0jhixik</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0jhixik" sourceRef="Activity_1ujviur" targetRef="Event_1vxout5" />
+    <bpmn:intermediateCatchEvent id="Event_10vrafx">
+      <bpmn:incoming>Flow_0qpouyo</bpmn:incoming>
+      <bpmn:outgoing>Flow_17ug4ma</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0s8ojfa" camunda:variableName="nextTaks" camunda:variableEvents="create,update">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${nextTaks=='task2'}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:userTask id="Activity_1jzvy40" name="task1">
+      <bpmn:incoming>Flow_11jw4ts</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qpouyo</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1ujviur" name="task2">
+      <bpmn:incoming>Flow_17ug4ma</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jhixik</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="conditional_interm_event-ex">
+      <bpmndi:BPMNEdge id="Flow_11jw4ts_di" bpmnElement="Flow_11jw4ts">
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="240" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qpouyo_di" bpmnElement="Flow_0qpouyo">
+        <di:waypoint x="340" y="117" />
+        <di:waypoint x="392" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17ug4ma_di" bpmnElement="Flow_17ug4ma">
+        <di:waypoint x="428" y="117" />
+        <di:waypoint x="480" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jhixik_di" bpmnElement="Flow_0jhixik">
+        <di:waypoint x="580" y="117" />
+        <di:waypoint x="632" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1vxout5_di" bpmnElement="Event_1vxout5">
+        <dc:Bounds x="632" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mhr6ts_di" bpmnElement="Activity_1jzvy40">
+        <dc:Bounds x="240" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rlu7ne_di" bpmnElement="Activity_1ujviur">
+        <dc:Bounds x="480" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_056sncg_di" bpmnElement="Event_10vrafx">
+        <dc:Bounds x="392" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

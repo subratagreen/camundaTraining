@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0s2da03" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="error_event_subprocess" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0gz7grn</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="Activity_0vtrzd0" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_1fv87ef">
+        <bpmn:outgoing>Flow_1k299in</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_0v0drqy" errorRef="Error_18tbi6j" camunda:errorCodeVariable="error-code" camunda:errorMessageVariable="error-msg" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_1k299in" sourceRef="Event_1fv87ef" targetRef="Activity_0e1dx97" />
+      <bpmn:endEvent id="Event_14m6sf5">
+        <bpmn:incoming>Flow_1dsm5ul</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1dsm5ul" sourceRef="Activity_0e1dx97" targetRef="Event_14m6sf5" />
+      <bpmn:userTask id="Activity_0e1dx97" name="please enroll when you are 18+">
+        <bpmn:incoming>Flow_1k299in</bpmn:incoming>
+        <bpmn:outgoing>Flow_1dsm5ul</bpmn:outgoing>
+      </bpmn:userTask>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_0gz7grn" sourceRef="StartEvent_1" targetRef="Activity_13fblu8" />
+    <bpmn:sequenceFlow id="Flow_18n6cu1" sourceRef="Activity_13fblu8" targetRef="Gateway_1a7jbw7" />
+    <bpmn:sequenceFlow id="Flow_085fj41" sourceRef="Gateway_1a7jbw7" targetRef="Event_06v2hd2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${age&gt;10 &amp;&amp; age&lt;18}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0kadhzg" sourceRef="Gateway_1a7jbw7" targetRef="Activity_0sf7nuh">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${age&gt;=18}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0dxg9l8" sourceRef="Activity_0sf7nuh" targetRef="Activity_0zm5j05" />
+    <bpmn:endEvent id="Event_0uc9gh8">
+      <bpmn:incoming>Flow_0ga9osg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ga9osg" sourceRef="Activity_0zm5j05" targetRef="Event_0uc9gh8" />
+    <bpmn:userTask id="Activity_13fblu8" name="enter age">
+      <bpmn:incoming>Flow_0gz7grn</bpmn:incoming>
+      <bpmn:outgoing>Flow_18n6cu1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0sf7nuh" name="eligible">
+      <bpmn:incoming>Flow_0kadhzg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dxg9l8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="Activity_0zm5j05" name="task-1">
+      <bpmn:incoming>Flow_0dxg9l8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ga9osg</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_06v2hd2">
+      <bpmn:incoming>Flow_085fj41</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1nb756s" errorRef="Error_18tbi6j" />
+    </bpmn:endEvent>
+    <bpmn:subProcess id="Activity_1i4n2zg" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_11dtmbe">
+        <bpmn:outgoing>Flow_0abb4vy</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_138fbsq" errorRef="Error_0e1krfb" camunda:errorCodeVariable="error-code" camunda:errorMessageVariable="error-msg" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_0abb4vy" sourceRef="Event_11dtmbe" targetRef="Activity_1rjepou" />
+      <bpmn:endEvent id="Event_1y8npoe">
+        <bpmn:incoming>Flow_1pkj6eh</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1pkj6eh" sourceRef="Activity_1rjepou" targetRef="Event_1y8npoe" />
+      <bpmn:userTask id="Activity_1rjepou" name="some error">
+        <bpmn:incoming>Flow_0abb4vy</bpmn:incoming>
+        <bpmn:outgoing>Flow_1pkj6eh</bpmn:outgoing>
+      </bpmn:userTask>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_0myay27" sourceRef="Gateway_1a7jbw7" targetRef="Event_0yko7cd" />
+    <bpmn:endEvent id="Event_0yko7cd">
+      <bpmn:incoming>Flow_0myay27</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1l388fh" errorRef="Error_0e1krfb" />
+    </bpmn:endEvent>
+    <bpmn:inclusiveGateway id="Gateway_1a7jbw7" default="Flow_0myay27">
+      <bpmn:incoming>Flow_18n6cu1</bpmn:incoming>
+      <bpmn:outgoing>Flow_085fj41</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0kadhzg</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0myay27</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+  </bpmn:process>
+  <bpmn:error id="Error_18tbi6j" name="Age_error" errorCode="Error-001" camunda:errorMessage="Not Eligible due to age" />
+  <bpmn:error id="Error_0e1krfb" name="input-error" errorCode="Error-002" camunda:errorMessage="enter some value for age" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="error_event_subprocess">
+      <bpmndi:BPMNEdge id="Flow_0gz7grn_di" bpmnElement="Flow_0gz7grn">
+        <di:waypoint x="188" y="200" />
+        <di:waypoint x="240" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18n6cu1_di" bpmnElement="Flow_18n6cu1">
+        <di:waypoint x="340" y="200" />
+        <di:waypoint x="395" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_085fj41_di" bpmnElement="Flow_085fj41">
+        <di:waypoint x="445" y="200" />
+        <di:waypoint x="502" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kadhzg_di" bpmnElement="Flow_0kadhzg">
+        <di:waypoint x="420" y="225" />
+        <di:waypoint x="420" y="310" />
+        <di:waypoint x="510" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dxg9l8_di" bpmnElement="Flow_0dxg9l8">
+        <di:waypoint x="610" y="310" />
+        <di:waypoint x="690" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ga9osg_di" bpmnElement="Flow_0ga9osg">
+        <di:waypoint x="790" y="310" />
+        <di:waypoint x="852" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0myay27_di" bpmnElement="Flow_0myay27">
+        <di:waypoint x="420" y="175" />
+        <di:waypoint x="420" y="100" />
+        <di:waypoint x="502" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0uc9gh8_di" bpmnElement="Event_0uc9gh8">
+        <dc:Bounds x="852" y="292" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yld8d5_di" bpmnElement="Activity_13fblu8">
+        <dc:Bounds x="240" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fe7dvu_di" bpmnElement="Activity_0sf7nuh">
+        <dc:Bounds x="510" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m0k8dc_di" bpmnElement="Activity_0zm5j05">
+        <dc:Bounds x="690" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1kn039t_di" bpmnElement="Event_06v2hd2">
+        <dc:Bounds x="502" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0n74aud_di" bpmnElement="Event_0yko7cd">
+        <dc:Bounds x="502" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1edt0rj_di" bpmnElement="Gateway_1a7jbw7">
+        <dc:Bounds x="395" y="175" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1m3ve3u_di" bpmnElement="Activity_0vtrzd0" isExpanded="true">
+        <dc:Bounds x="160" y="380" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1k299in_di" bpmnElement="Flow_1k299in">
+        <di:waypoint x="236" y="480" />
+        <di:waypoint x="290" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dsm5ul_di" bpmnElement="Flow_1dsm5ul">
+        <di:waypoint x="390" y="480" />
+        <di:waypoint x="452" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_16zrufk_di" bpmnElement="Event_1fv87ef">
+        <dc:Bounds x="200" y="462" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14m6sf5_di" bpmnElement="Event_14m6sf5">
+        <dc:Bounds x="452" y="462" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pf7s83_di" bpmnElement="Activity_0e1dx97">
+        <dc:Bounds x="290" y="440" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00xihn0_di" bpmnElement="Activity_1i4n2zg" isExpanded="true">
+        <dc:Bounds x="565" y="380" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0abb4vy_di" bpmnElement="Flow_0abb4vy">
+        <di:waypoint x="641" y="480" />
+        <di:waypoint x="700" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pkj6eh_di" bpmnElement="Flow_1pkj6eh">
+        <di:waypoint x="800" y="480" />
+        <di:waypoint x="862" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_03ecxmf_di" bpmnElement="Event_11dtmbe">
+        <dc:Bounds x="605" y="462" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1y8npoe_di" bpmnElement="Event_1y8npoe">
+        <dc:Bounds x="862" y="462" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rcmoig_di" bpmnElement="Activity_1rjepou">
+        <dc:Bounds x="700" y="440" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
