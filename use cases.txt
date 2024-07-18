@@ -157,7 +157,8 @@ http://localhost:8080/engine-rest/condition
 
 2. read the text file in a service task, convert the json content into customer object and add customer object in variable scope
 
-
+===================
+configure multiple compensation in transaction sub process, then use cancel throw-catch in that transaction sub-process
 ======================
 
 secure camunda rest-api using spring security and allow tasklist/cockpit to use camunda users
@@ -218,3 +219,4 @@ solve the ticket (implementation/operation)
 	- also check laptop/desktop/mobile/tv/
 	- resolve the problem
 	- timeout - 2 days, after 2 days, it will be escalated to higher mgmt
+	
