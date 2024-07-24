@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0iwd3d4" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <decision id="estimation" name="Decision 1" camunda:historyTimeToLive="10">
+    <decisionTable id="DecisionTable_1341971">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>sprintTask</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1bjwsqb">
+        <inputExpression id="LiteralExpression_1qyn2bl" typeRef="integer">
+          <text>person</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="days" typeRef="integer" />
+      <rule id="DecisionRule_1dpk72s">
+        <description>rule-1</description>
+        <inputEntry id="UnaryTests_00fx8nl">
+          <text>"planning"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13rq4ea">
+          <text>&lt;=5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pw8y1w">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kemott">
+        <description>rule-2</description>
+        <inputEntry id="UnaryTests_1jw0jwy">
+          <text>"design"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ydyzfy">
+          <text>&lt;=1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n5rb0e">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06bjrsq">
+        <description>rule-3</description>
+        <inputEntry id="UnaryTests_077hjic">
+          <text>"development"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j7e6uw">
+          <text>[1..3]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1uk71cs">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0zrn863">
+        <description>rule-4</description>
+        <inputEntry id="UnaryTests_0nqhgfg">
+          <text>"testing"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dspxtc">
+          <text>&gt;=2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17zsxau">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_151r7ij">
+        <description>rule-5</description>
+        <inputEntry id="UnaryTests_00toa3o">
+          <text>"deployment"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jo9c3n">
+          <text>&gt;=1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bcp580">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="estimation">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

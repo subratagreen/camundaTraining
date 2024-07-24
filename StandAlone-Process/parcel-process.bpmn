@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_11fjowj" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="parcel-process" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_12a8muq</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_12a8muq" sourceRef="StartEvent_1" targetRef="Activity_0qup9mv" />
+    <bpmn:sequenceFlow id="Flow_058ysah" sourceRef="Activity_0qup9mv" targetRef="Activity_070l8xh" />
+    <bpmn:endEvent id="Event_0yymiqc">
+      <bpmn:incoming>Flow_1swdool</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1swdool" sourceRef="Activity_1x3v51d" targetRef="Event_0yymiqc" />
+    <bpmn:businessRuleTask id="Activity_070l8xh" name="get weight cate" camunda:resultVariable="wgt-category" camunda:decisionRef="Decision_cc1" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_058ysah</bpmn:incoming>
+      <bpmn:outgoing>Flow_0m3mdbi</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:userTask id="Activity_0qup9mv" name="input">
+      <bpmn:incoming>Flow_12a8muq</bpmn:incoming>
+      <bpmn:outgoing>Flow_058ysah</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1x3v51d" name="output">
+      <bpmn:incoming>Flow_0p5ptw6</bpmn:incoming>
+      <bpmn:outgoing>Flow_1swdool</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0m3mdbi" sourceRef="Activity_070l8xh" targetRef="Activity_03g2pi8" />
+    <bpmn:sequenceFlow id="Flow_0p5ptw6" sourceRef="Activity_03g2pi8" targetRef="Activity_1x3v51d" />
+    <bpmn:businessRuleTask id="Activity_03g2pi8" name="get total price" camunda:resultVariable="charges" camunda:decisionRef="Decision_final" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_0m3mdbi</bpmn:incoming>
+      <bpmn:outgoing>Flow_0p5ptw6</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="parcel-process">
+      <bpmndi:BPMNEdge id="Flow_12a8muq_di" bpmnElement="Flow_12a8muq">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_058ysah_di" bpmnElement="Flow_058ysah">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="440" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1swdool_di" bpmnElement="Flow_1swdool">
+        <di:waypoint x="930" y="117" />
+        <di:waypoint x="992" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0m3mdbi_di" bpmnElement="Flow_0m3mdbi">
+        <di:waypoint x="540" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p5ptw6_di" bpmnElement="Flow_0p5ptw6">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="830" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_08utct3_di" bpmnElement="Activity_0qup9mv">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0yymiqc_di" bpmnElement="Event_0yymiqc">
+        <dc:Bounds x="992" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vhzz6f_di" bpmnElement="Activity_1x3v51d">
+        <dc:Bounds x="830" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bbj87r_di" bpmnElement="Activity_03g2pi8">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05lj0hq_di" bpmnElement="Activity_070l8xh">
+        <dc:Bounds x="440" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

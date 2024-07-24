@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1yu9kdq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="Process_savings_account-ex" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0qgq3jf</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0qgq3jf" sourceRef="StartEvent_1" targetRef="Activity_1vd0gjn" />
+    <bpmn:sequenceFlow id="Flow_1a04t2y" sourceRef="Activity_1vd0gjn" targetRef="Activity_0aou40a" />
+    <bpmn:sequenceFlow id="Flow_14tq36h" sourceRef="Activity_0aou40a" targetRef="Activity_005xz3q" />
+    <bpmn:endEvent id="Event_0qywccv">
+      <bpmn:incoming>Flow_0zr3mah</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0zr3mah" sourceRef="Activity_005xz3q" targetRef="Event_0qywccv" />
+    <bpmn:userTask id="Activity_1vd0gjn" name="saving account form fillup">
+      <bpmn:incoming>Flow_0qgq3jf</bpmn:incoming>
+      <bpmn:outgoing>Flow_1a04t2y</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:callActivity id="Activity_0aou40a" name="address validation" calledElement="validateAddress">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1a04t2y</bpmn:incoming>
+      <bpmn:outgoing>Flow_14tq36h</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:userTask id="Activity_005xz3q" name="open savings account">
+      <bpmn:incoming>Flow_14tq36h</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zr3mah</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_savings_account-ex">
+      <bpmndi:BPMNEdge id="Flow_0qgq3jf_di" bpmnElement="Flow_0qgq3jf">
+        <di:waypoint x="215" y="97" />
+        <di:waypoint x="270" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a04t2y_di" bpmnElement="Flow_1a04t2y">
+        <di:waypoint x="370" y="97" />
+        <di:waypoint x="430" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14tq36h_di" bpmnElement="Flow_14tq36h">
+        <di:waypoint x="530" y="97" />
+        <di:waypoint x="590" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zr3mah_di" bpmnElement="Flow_0zr3mah">
+        <di:waypoint x="690" y="97" />
+        <di:waypoint x="752" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qywccv_di" bpmnElement="Event_0qywccv">
+        <dc:Bounds x="752" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18zwvgo_di" bpmnElement="Activity_1vd0gjn">
+        <dc:Bounds x="270" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0n6ge1f_di" bpmnElement="Activity_0aou40a">
+        <dc:Bounds x="430" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ne55j9_di" bpmnElement="Activity_005xz3q">
+        <dc:Bounds x="590" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
