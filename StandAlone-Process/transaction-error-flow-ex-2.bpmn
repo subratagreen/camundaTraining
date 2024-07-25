@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1jtlftd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="transaction-error-flow-ex-2" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1yvg2jx</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1yvg2jx" sourceRef="StartEvent_1" targetRef="Activity_12lshmr" />
+    <bpmn:sequenceFlow id="Flow_1coaks3" sourceRef="Activity_12lshmr" targetRef="Activity_19fhve3" />
+    <bpmn:sequenceFlow id="Flow_0ylst4m" sourceRef="Activity_19fhve3" targetRef="Activity_090wnvp" />
+    <bpmn:sequenceFlow id="Flow_00k7fkx" sourceRef="Activity_090wnvp" targetRef="Activity_1p2ui6p" />
+    <bpmn:sequenceFlow id="Flow_03p3zzn" sourceRef="Activity_1p2ui6p" targetRef="Activity_07nizdp" />
+    <bpmn:endEvent id="Event_16euafd">
+      <bpmn:incoming>Flow_1jl50qk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1jl50qk" sourceRef="Activity_07nizdp" targetRef="Event_16euafd" />
+    <bpmn:scriptTask id="Activity_12lshmr" name="ST-1" camunda:asyncBefore="true" scriptFormat="js">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>3</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1yvg2jx</bpmn:incoming>
+      <bpmn:outgoing>Flow_1coaks3</bpmn:outgoing>
+      <bpmn:script>console.log("script task - 1");</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_19fhve3" name="ST-2" scriptFormat="js">
+      <bpmn:incoming>Flow_1coaks3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ylst4m</bpmn:outgoing>
+      <bpmn:script>console.log("script task - 2");</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_090wnvp" name="ST-3" camunda:asyncBefore="true" scriptFormat="js">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>4</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ylst4m</bpmn:incoming>
+      <bpmn:outgoing>Flow_00k7fkx</bpmn:outgoing>
+      <bpmn:script>console.log("script task - 3");</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_1p2ui6p" name="ST-4" scriptFormat="js">
+      <bpmn:incoming>Flow_00k7fkx</bpmn:incoming>
+      <bpmn:outgoing>Flow_03p3zzn</bpmn:outgoing>
+      <bpmn:script>console.log("script task - 4);</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_07nizdp" name="ST-5" scriptFormat="js">
+      <bpmn:incoming>Flow_03p3zzn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jl50qk</bpmn:outgoing>
+      <bpmn:script>console.log("script task - 5");</bpmn:script>
+    </bpmn:scriptTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="transaction-error-flow-ex-2">
+      <bpmndi:BPMNEdge id="Flow_1yvg2jx_di" bpmnElement="Flow_1yvg2jx">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1coaks3_di" bpmnElement="Flow_1coaks3">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ylst4m_di" bpmnElement="Flow_0ylst4m">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00k7fkx_di" bpmnElement="Flow_00k7fkx">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03p3zzn_di" bpmnElement="Flow_03p3zzn">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="910" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jl50qk_di" bpmnElement="Flow_1jl50qk">
+        <di:waypoint x="1010" y="117" />
+        <di:waypoint x="1072" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16euafd_di" bpmnElement="Event_16euafd">
+        <dc:Bounds x="1072" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_10xvxug_di" bpmnElement="Activity_12lshmr">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1l4iy5m_di" bpmnElement="Activity_19fhve3">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1388o79_di" bpmnElement="Activity_090wnvp">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1i9yxpk_di" bpmnElement="Activity_1p2ui6p">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dzks9u_di" bpmnElement="Activity_07nizdp">
+        <dc:Bounds x="910" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
