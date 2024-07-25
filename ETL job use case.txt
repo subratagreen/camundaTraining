@@ -1,0 +1,23 @@
+Data Transfer like an ETL JOB (Process-1)
+--------
+1. raise a case - with source and destination and related details (some kind of UI) -> rest api call -> start the process - user task
+
+2. make a connection with source -> (connection configuration)
+	2a. if error let all stakeholder know -> sendTask: (java code to send mail)
+	2b. if success, then continue
+	
+3. make a connection with destination
+	3a. if error let all stakeholder know
+	3b. if success, then continue
+	
+4. start transferring the data 
+
+5. send information once the transfer started 
+
+6. check status 
+7. send interim update 
+8. check status 
+9. if transfer completed
+10. do the sanity
+11. if there are any failed case - rerun that 
+12. if all are success, send information to source and destination POCs.
