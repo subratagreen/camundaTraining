@@ -1,0 +1,18 @@
+spring.datasource.url: jdbc:h2:file:./camunda-h2-database
+
+camunda.bpm.admin-user:
+  id: demo
+  password: demo
+  
+server.port: 9090
+  
+camunda.bpm.client:
+  base-url: http://localhost:8585/engine-rest #URL of Process Engine
+  lock-duration: 20000 # time in ms & external task will be locked
+  subscriptions:
+    ratingProvider: 
+      variable-names: [] 
+      process-definition-key: externalTaskClientProcess 
+    candidateRating:
+      variable-names: candidateScore
+      process-definition-key: externalTaskClientProcess
