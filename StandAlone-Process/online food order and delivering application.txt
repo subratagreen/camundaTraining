@@ -1,0 +1,68 @@
+Online Food Order and Delivery
+------------------------------
+1. Order Service
+	- UI (list of foods and price) <----> list 
+	- select foods (foodId, restaurantId)
+	- add those into cart (orderId, customerId)
+	- add delivery info and contact info (address, mobileNumber, email)
+	- add payment info (paymentMode)
+	- other instructions (instructions)
+	
+	- after the order is confirmed, send info to Payment Service
+	
+	- once confirmation recvd from Payment Service, notify Food preparation with (OrderId, restaurantId)
+	
+	- once food order accepted by food preparation service, then notify delivery service
+	
+	- once confirmation recvd, it completes the order.
+	
+2. Payment Service 
+	- orderId
+	- UI (select paymentMode)
+	- UI (enter payment details - card, online, paymentGW, COD)
+	- password
+	- coupons/cashback
+	- payment is success - confirmation to Order Service - for further step
+	- payment is failed - retry - inform to Order Service - for cancellation
+
+3. Food Preparation Service
+	- orderId, restaurantId
+	- accepted - restaurant
+	- notify to order service 
+	- starting the food preparation with some estimated time
+	- once food is prepared and packaged - notify delivery service
+
+4. Delivery Service 
+	- orderId and restaurantId
+	- customerId and address
+	- assigning a delivery ex
+	- checks with restaurant whether the food is prepared
+	- once, it recieves the confirmation from food preparation service
+	- pickup the order
+	- starts to deliver the food 
+	- once delivered, it will notify - order service - delivery completed
+	
+
+1. will those be - individual services ?
+	- yes.. microservice adv
+	
+2. will these service have separate process flow ?
+	- yes.. flexibility, asynchronous, individual responsibility
+	
+3. will these process communicate to each other ? or orchrestrated ?
+	- yes, these services will be communicating to each other
+	
+4. can we use - rest api ?
+	- yes
+
+5. can we call rest api from camunda process(connector) or java api (restTemplate / webclient) ? 
+	- when request/response size is small then we can use connector
+	- when request/response size is big then we can use java api
+	
+6. can we use external task ? 
+	- yes, within payment service we can have external task(third party APIs and paymentGW)
+
+
+
+
+
