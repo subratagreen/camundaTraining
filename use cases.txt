@@ -163,6 +163,57 @@ configure multiple compensation in transaction sub process, then use cancel thro
 
 secure camunda rest-api using spring security and allow tasklist/cockpit to use camunda users
 
+==========
+
+look into wildfly server configuration for process engine definition 
+where to define multiple process engine
+in wildfly - define 2 tenants 
+deploy 1 process def in 1 tenatn and same process with small change in diff tenant... check the deployment and start processes
+ 
+============= by Subrat Das
+3:17 PM
+Subrat Das
+=============
+in spring boot, app - create 2 tenants  by Subrat Das
+3:17 PM
+Subrat Das
+in spring boot, app - create 2 tenants 
+programmatically (java api) - deploy 2 vers... by Subrat Das
+3:18 PM
+Subrat Das
+programmatically (java api) - deploy 2 version of same process into different tenants
+------------------- by Subrat Das
+5:17 PM
+Subrat Das
+-------------------
+create 2 users create a group add users to ... by Subrat Das
+5:19 PM
+Subrat Das
+create 2 users
+create a group
+add users to group
+give that group - application access and task access
+create a process and assign user task to that user/group
+now, deploy and start the process
+login using new user credentials 
+check the access
+ 
+------------- by Subrat Das
+5:19 PM
+Subrat Das
+-------------
+use spring security -  create a spring boot... by Subrat Das
+5:21 PM
+Subrat Das
+use spring security - 
+create a spring boot application with camunda dependency
+add spring security 
+add users authentication and authorization 
+create api to start a process
+secure the apis using spring authetication 
+ 
+has context menu
+
 =======================
 
 request for new connection (customer)
