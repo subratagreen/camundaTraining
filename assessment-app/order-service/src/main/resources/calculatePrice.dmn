@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0nw35tu" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <decision id="calculatePrice" name="Decision 1" camunda:historyTimeToLive="180">
+    <decisionTable id="DecisionTable_0848175">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>food</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="price" typeRef="integer" biodi:width="192" />
+      <rule id="DecisionRule_1n2zgvp">
+        <inputEntry id="UnaryTests_0d9stwx">
+          <text>"pizza"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13wqnmm">
+          <text>100</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1joxmv8">
+        <inputEntry id="UnaryTests_06j14b9">
+          <text>"pasta"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fyygzd">
+          <text>80</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_145lfhs">
+        <inputEntry id="UnaryTests_0741u06">
+          <text>"dosa"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16r44xt">
+          <text>100</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="calculatePrice">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
